@@ -1,0 +1,41 @@
+catalog:
+  mysql:
+    secret:
+      create: true
+      name: catalog-db
+      username: catalog
+    persistentVolume:
+      enabled: true
+      accessMode:
+        - ReadWriteOnce
+      size: 30Gi
+      storageClass: eks-auto-ebs-csi-sc
+
+ui:
+  endpoints:
+    catalog: http://retail-store-app-catalog:80
+    carts: http://retail-store-app-carts:80
+    checkout: http://retail-store-app-checkout:80
+    orders: http://retail-store-app-orders:80
+    assets: http://retail-store-app-assets:80
+  autoscaling:
+    enabled: true
+    minReplicas: 5
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 80
+  topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: topology.kubernetes.io/zone
+    whenUnsatisfiable: ScheduleAnyway
+    labelSelector:
+      matchLabels:
+        app: ui
+  - maxSkew: 1
+    topologyKey: kubernetes.io/hostname
+    whenUnsatisfiable: ScheduleAnyway
+    labelSelector:
+      matchLabels:
+        app: ui
+  ingress:
+    enabled: true
+    className: eks-auto-alb
