@@ -11,8 +11,7 @@ eksctl create cluster -f cluster.yaml
 2. Check the cluster State
 
 ```
-kubectl get nodes
-kubectl get pods
+kubectl get nodes,pods,deploy
 ```
 
 3. Creating an Ingress (**ingress.yaml**)
