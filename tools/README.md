@@ -31,25 +31,3 @@ chmod 700 get_helm.sh
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 ```
 
-## jq, envsubst and bashcompletion installation
-
-```
-sudo yum -y install jq gettext bash-completion moreutils
-```
-
-## kubectl, helm, eksctl bash-completion
-
-```
-kubectl completion bash >>  ~/.bash_completion
-. /etc/profile.d/bash_completion.sh
-. ~/.bash_completion
-
-helm completion bash >> ~/.bash_completion
-. /etc/profile.d/bash_completion.sh
-. ~/.bash_completion
-source <(helm completion bash)
-
-eksctl completion bash >> ~/.bash_completion
-. /etc/profile.d/bash_completion.sh
-. ~/.bash_completion
-```
